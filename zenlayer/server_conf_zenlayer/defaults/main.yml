@@ -1,0 +1,17 @@
+---
+# defaults file for baremetal_kvm
+user: root
+kvm_packages: 
+  - bridge-utils 
+  - cpu-checker 
+  - libvirt-clients 
+  - libvirt-daemon 
+  - qemu 
+  - qemu-kvm 
+  - virtinst 
+  - virt-viewer 
+  - virt-manager 
+  - cockpit-machines 
+  - cockpit 
+  - libvirt-daemon-system
+  - iperf3

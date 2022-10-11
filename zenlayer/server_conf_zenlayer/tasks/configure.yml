@@ -1,0 +1,38 @@
+---
+## Check if 99-bridge rules exists 
+- name: get 99-brdige.rules stats
+  stat:
+    path: "/etc/udev/rules.d/99-bridge.rules"
+  register: netfilter_rules
+  
+- name: check netfilter rules exists
+  assert: { that: true, quiet: true }
+  changed_when: true
+  when: netfilter_rules.stat.exists == False
+  notify: create netfilter rules
+
+
+## add root user to libvrt and kvm group
+- name: adding existing user '{{ user }}' to group sudo
+  user:
+    name: '{{ user }}'
+    groups: kvm,libvirt
+    append: yes
+
+- name: Check if br0 exists
+  assert: { that: true, quiet: true }
+  changed_when: true
+  when: ansible_facts['ansible_br0'] is defined
+  notify: configure network
+
+## check if host-brdige exists
+- name: get host-brdige.xml stats
+  stat:
+    path: ~/host-bridge.xml
+  register: host_bridge
+
+- name: check host-bridge.xml exists
+  assert: { that: true, quiet: true }
+  changed_when: true
+  when: host_bridge.stat.exists == False
+  notify: create host bridge network

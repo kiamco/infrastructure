@@ -1,0 +1,11 @@
+---
+# handlers file for baremetal_kvm
+## Update Network Config via Netplan
+- name: configure network
+  include_tasks: netplan.yml
+- name: create netfilter rules
+  include_tasks: netfilter_rules.yml
+- name: create host bridge network
+  include_tasks: host_bridge.yml
+- name: download KVM packages
+  include_tasks: kvm_packages.yml

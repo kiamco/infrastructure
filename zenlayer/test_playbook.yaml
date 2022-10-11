@@ -1,0 +1,5 @@
+---
+- hosts: zenlayer
+  tasks: 
+    - import_role:
+       name: /Users/kim.kiamco/github/infrastructure/zenlayer/server_conf_zenlayer

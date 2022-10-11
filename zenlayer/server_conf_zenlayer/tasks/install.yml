@@ -1,0 +1,45 @@
+---
+- name: Gather package facts
+  package_facts:
+    manager: apt
+
+- name: Check if all KVM packages are installed
+  assert: { that: true, quiet: true }
+  changed_when: true
+  loop: "{{ kvm_packages }}"
+  when: "ansible_facts.packages[item] is undefined"
+  notify: download KVM packages
+
+# - name: Update and upgrade apt packages
+#   apt:
+#     upgrade: yes
+#     update_cache: yes
+#     cache_valid_time: 86400
+# - name: Download apt packages to run KVMs
+#   apt:
+#     pkg:
+#     - bridge-utils 
+#     - cpu-checker 
+#     - libvirt-clients 
+#     - libvirt-daemon 
+#     - qemu 
+#     - qemu-kvm 
+#     - virtinst 
+#     - virt-viewer 
+#     - virt-manager 
+#     - cockpit-machines 
+#     - cockpit 
+#     - libvirt-daemon-system
+#     - iperf3
+# - name: Enable and start Libvirtd
+#   systemd:
+#     name: libvirtd
+#     state: started
+#     enabled: yes
+# - name: Enable and start cockpit 
+#   systemd:
+#     name: cockpit
+#     state: started
+#     enabled: yes
+
+

@@ -1,0 +1,10 @@
+---
+## This will only take effect after Reboot
+- name: Copy netfilter rules for briges
+  copy:
+    src: files/bridge.conf
+    dest: /etc/sysctl.d/
+- name: Set flags to disable netfilter rules on reboot
+  copy:
+    src: files/99-bridge.rules
+    dest: /etc/udev/rules.d/

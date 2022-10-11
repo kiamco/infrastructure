@@ -1,0 +1,14 @@
+---
+## This will only take effect after Reboot
+- name: copy host bridge xml
+  copy:
+    src: files/host-bridge.xml
+    dest: ~/
+- name: define host-brdige network
+  command: virsh net-define host-bridge.xml
+- name: start host-brdige network
+  command: virsh net-start host-bridge
+- name: autostart host-brdige network
+  command: virsh net-autostart host-bridge
+
+

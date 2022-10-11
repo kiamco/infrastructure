@@ -1,0 +1,25 @@
+---
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    lan0:
+      dhcp4: no
+      dhcp6: no
+      addresses: ["{{ ansible_lan0 }}/24"]
+    wan0:
+      dhcp4: no
+      dhcp6: no
+  bridges:
+    br0:
+      interfaces: [wan0]
+      dhcp4: no
+      dhcp6: no
+      addresses: [{{ ansible_wan0.ipv4.addresses }}/29,"{{ ansible_wan0.ipv6.addresses }}/64"]
+      gateway4: {{ asible_default_ipv4.gateway }}
+      gateway6: "{{ asible_default_ipv6.gateway }}"
+      nameservers:
+        addresses: [8.8.8.8,8.8.4.4] 
+
+
+
